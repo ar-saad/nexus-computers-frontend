@@ -23,7 +23,7 @@ The frontend for Nexus Computers, a web storefront for browsing and filtering co
 
 ```bash
 # Clone the repository
-git clone <repository-url>
+git clone https://github.com/ar-saad/nexus-computers-frontend.git
 cd nexus-computers-frontend
 
 # Install dependencies
@@ -42,9 +42,9 @@ The app will be available at the URL printed in the terminal (typically `http://
 
 ## Available Scripts
 
-| Command           | Description                              |
-| ----------------- | ---------------------------------------- |
-| `npm run dev`     | Start the development server             |
-| `npm run build`   | Type-check and build for production      |
-| `npm run preview` | Preview the production build locally     |
-| `npm run lint`    | Run ESLint across the project            |
+| Command           | Description                          |
+| ----------------- | ------------------------------------ |
+| `npm run dev`     | Start the development server         |
+| `npm run build`   | Type-check and build for production  |
+| `npm run preview` | Preview the production build locally |
+| `npm run lint`    | Run ESLint across the project        |
