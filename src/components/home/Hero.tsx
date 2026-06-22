@@ -170,7 +170,7 @@ const Hero = () => {
           />
 
           <div
-            className="relative z-10 flex items-center h-full px-7 lg:px-12 gap-6 lg:gap-10"
+            className="relative z-10 flex items-center h-full px-7 lg:px-15 gap-6 lg:gap-10"
             style={{
               opacity: animating ? 0 : 1,
               transform: animating ? "translateY(8px)" : "translateY(0)",
@@ -363,7 +363,9 @@ const Hero = () => {
               <p className="text-xs font-bold text-ink leading-tight">
                 {t.label}
               </p>
-              <p className="text-[11px] text-ink-muted leading-tight">{t.sub}</p>
+              <p className="text-[11px] text-ink-muted leading-tight">
+                {t.sub}
+              </p>
             </div>
           </div>
         ))}
