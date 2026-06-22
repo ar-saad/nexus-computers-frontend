@@ -14,7 +14,6 @@ interface BaseProduct {
   brand: string;
   price: number;
   originalPrice?: number;
-  image: string;
   images?: string[];
   badge?: ProductBadge;
   description: string;
