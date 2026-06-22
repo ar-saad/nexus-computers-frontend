@@ -1,4 +1,4 @@
-import type { Product } from "../types/product";
+import type { Product, ProductCategory } from "../types/product";
 
 export const products: Product[] = [
   // ── CPUs ────────────────────────────────────────────────────────────────────
@@ -300,3 +300,71 @@ export const products: Product[] = [
 
 export const getByCategory = (category: Product["category"]) =>
   products.filter((p) => p.category === category);
+
+// ── Filtering & sorting ───────────────────────────────────────────────────────
+
+export type SortOption =
+  | "featured"
+  | "price-asc"
+  | "price-desc"
+  | "rating-desc"
+  | "name-asc";
+
+export interface ProductFilterState {
+  categories: ProductCategory[];
+  brands: string[];
+  minPrice?: number;
+  maxPrice?: number;
+  inStockOnly: boolean;
+  sort: SortOption;
+}
+
+export const DEFAULT_FILTERS: ProductFilterState = {
+  categories: [],
+  brands: [],
+  inStockOnly: false,
+  sort: "featured",
+};
+
+/**
+ * Distinct brands in the catalogue, alphabetised. Scoping to a set of
+ * categories lets the brand facet shrink to only what's relevant once a
+ * shopper has narrowed by category.
+ */
+export const getBrands = (categories: ProductCategory[] = []): string[] => {
+  const pool = categories.length
+    ? products.filter((p) => categories.includes(p.category))
+    : products;
+  return [...new Set(pool.map((p) => p.brand))].sort((a, b) =>
+    a.localeCompare(b),
+  );
+};
+
+/** The cheapest and most expensive prices across the whole catalogue. */
+export const getPriceBounds = (): { min: number; max: number } => {
+  const prices = products.map((p) => p.price);
+  return { min: Math.min(...prices), max: Math.max(...prices) };
+};
+
+const SORTERS: Record<SortOption, (a: Product, b: Product) => number> = {
+  featured: () => 0,
+  "price-asc": (a, b) => a.price - b.price,
+  "price-desc": (a, b) => b.price - a.price,
+  "rating-desc": (a, b) => b.rating - a.rating,
+  "name-asc": (a, b) => a.name.localeCompare(b.name),
+};
+
+/** Pure: apply every active filter, then sort. Original order is preserved
+ *  for "featured" since Array.prototype.sort is stable. */
+export const filterAndSort = (state: ProductFilterState): Product[] => {
+  const filtered = products.filter((p) => {
+    if (state.categories.length && !state.categories.includes(p.category))
+      return false;
+    if (state.brands.length && !state.brands.includes(p.brand)) return false;
+    if (state.minPrice != null && p.price < state.minPrice) return false;
+    if (state.maxPrice != null && p.price > state.maxPrice) return false;
+    if (state.inStockOnly && !p.inStock) return false;
+    return true;
+  });
+  return filtered.sort(SORTERS[state.sort]);
+};

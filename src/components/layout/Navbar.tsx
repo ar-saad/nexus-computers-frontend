@@ -11,12 +11,12 @@ import {
 import { TbFlame } from "react-icons/tb";
 
 const NAV_LINKS = [
-  { label: "CPUs", href: "/category/cpu" },
-  { label: "GPUs", href: "/category/gpu" },
-  { label: "Memory", href: "/category/ram" },
-  { label: "Motherboards", href: "/category/motherboard" },
-  { label: "Storage", href: "/category/storage" },
-  { label: "Laptops", href: "/category/laptop" },
+  { label: "CPUs", href: "/products?category=cpu" },
+  { label: "GPUs", href: "/products?category=gpu" },
+  { label: "Memory", href: "/products?category=ram" },
+  { label: "Motherboards", href: "/products?category=motherboard" },
+  { label: "Storage", href: "/products?category=storage" },
+  { label: "Laptops", href: "/products?category=laptop" },
 ];
 
 const Navbar = () => {

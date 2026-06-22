@@ -93,7 +93,7 @@ const CategorySelector = () => {
           {CATEGORIES.map(({ category, label, blurb, Icon }) => (
             <Link
               key={category}
-              to={`/category/${category}`}
+              to={`/products?category=${category}`}
               className="group flex flex-col items-center text-center gap-3 rounded-2xl bg-white border border-border p-5 hover:border-brand hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
             >
               <span className="flex items-center justify-center w-14 h-14 rounded-xl bg-surface-2 text-ink-2 group-hover:bg-brand-light group-hover:text-brand transition-colors duration-200">
